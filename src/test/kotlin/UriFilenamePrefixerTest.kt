@@ -21,7 +21,7 @@ class UriFilenamePrefixerTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["img.gif", "../doc.html", "https://example.org/path/to/doc.html"])
+    @ValueSource(strings = ["../doc.html", "https://example.org/path/to/doc.html"])
     fun `it should ignore invalid references`(input: String) {
         val output = (UriFilenamePrefixer("my_prefix_bar")::prefix)(input)
 

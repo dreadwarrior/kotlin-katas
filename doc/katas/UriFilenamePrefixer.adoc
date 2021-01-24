@@ -56,6 +56,8 @@ Examples:
 
 . It's not necessary to create a fully fledged HTML fixture, use direct
   examples for references to stimulate the system under test.
+. Assume the reference passed to the prefixer points to an HTML document, no
+  need to filter non-`.html`-references.
 
 == Links
 

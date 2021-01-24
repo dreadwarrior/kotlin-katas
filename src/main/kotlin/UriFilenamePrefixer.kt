@@ -19,7 +19,6 @@ class UriFilenamePrefixer(
 
     private fun URI.isValid(): Boolean {
         return !isAbsolute &&
-            path.endsWith(".html") &&
             normalize() == resolve(normalize())
     }
 }
