@@ -46,6 +46,13 @@ Every Kata _should_ contain the following sections:
 link:doc/katas/UriFilenamePrefixer.adoc[UriFilenamePrefixer]::
 Prefix the file name component of an URI with a given prefix.
 
+== Feedback
+
+I am very happy to receive feedback and discussions about this project. I have
+prepared a space at Gitter for this:
+
+image:https://badges.gitter.im/dreadwarrior/kotlin-katas.svg[link="https://gitter.im/dreadwarrior/kotlin-katas?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge"]
+
 == Links
 
 * link:https://martinfowler.com/bliki/GivenWhenThen.html[Martin Fowler: GivenWhenThen]
