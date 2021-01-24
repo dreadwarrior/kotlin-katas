@@ -1,0 +1,103 @@
+= UriFilenamePrefixer
+:keywords: jvm, kotlin, primitive obsession, stdlib anaemia
+:url-java_net_uri: https://docs.oracle.com/javase/7/docs/api/java/net/URI.html
+:url-pragmatic_programming_cheat_sheet: https://cheatography.com/marconlsantos/cheat-sheets/pragmatic-programming/
+:url-rfc3986_path: https://tools.ietf.org/html/rfc3986#section-3.3
+:url-whatwg_url_schemes: https://wiki.whatwg.org/wiki/URL_schemes#javascript:_URLs
+
+== Problem description
+
+An imaginary software application processes HTML documents of a documentation
+ensemble containing multiple other HTML documents.
+
+The ensemble originates from outside the application and is provided to the
+application by the client's staff using commercially available documentation
+software.
+
+The documents can be virtually connected in a tree-like manner, but are not
+physically stored hierarchically.
+
+A document contains references to other HTML documents of the ensemble.
+
+Because of the processing of those "raw" documents in the application, it became
+necessary to prefix the file name segment of those URIs with a given value.
+
+.Example structure of the ensemble
+----
+/
+|-- html
+|   |-- doc1.html (Document 1)
+|   +-- doc2.html (Document 2)
++-- img
+    |-- img1.png
+    +-- img2.png
+
+----
+
+== Tasks
+
+*Given* `doc1.html` references `doc2.html` +
+*When* prefixing ensemble document references with `my_prefix` +
+*Then* `doc1.html` contains the reference `my_doc2.html`.
+
+== Questions
+
+[qanda]
+Should you care about edge cases?::
+Examples:
+* anchored ensemble references (e.g. `doc3.html#section-a`)
+* fully-qualified relative references (e.g. `./doc2.html`)
+* traversing relative references (e.g. `../doc3.html`)
+* absolute references to HTML documents (e.g. `https://example.org/foo.html`)
+* JavaScript references (e.g. `javascript:alert('foo.html')`)
+* references with non-compliant referenes (e.g. `doc2<.html`)
+
+== Hints
+
+. It's not necessary to create a fully fledged HTML fixture, use direct
+  examples for references to stimulate the system under test.
+
+== Links
+
+* link:https://tools.ietf.org/html/rfc3986[RFC 3986] - Uniform Resource
+  Identifiers (URI): Generic Syntax
+
+== Diary
+
+While reviewing the solution to this problem, I encountered the following:
+
+* the content of the references were manipulated by primitive string operations
+* no usage of standard library APIs
+* happy-path testing
+
+The solution handled direct, same-dir references without problems but tangled up
+references pointing to external HTML resources (URLs) and traversing references.
+
+Examples:
+
+* `http://example.org/foo.html` became `prefix_http://example.org/foo.html`
+* `../doc.html` became `prefix_../doc.html`
+
+So I came up with some additional edge-case tests and refactored the solution to
+make use of standard library APIs ({url-java_net_uri}[URI]).
+
+At the review meeting it was argued that
+
+* no external URLs were ever seen in HTML documents,
+* references with path traversal (`../`) and JavaScript URIs (`javasript:...`)
+  were considered invalid HTML
+
+In my opinion the first argument violates the "Assertive Programming" principle
+of {url-pragmatic_programming_cheat_sheet}[pragmatic programming]. The code
+simply did not reflect this statement.
+
+The second argument revealed a {url-rfc3986_path}[worrying]
+{url-whatwg_url_schemes}[knowledge gap].
+
+=== Personal conclusion
+
+I associate two important insights with this experience:
+
+. I need to prepare better for incomplete knowledge.
+. I need to learn to acknowledge pragmatic solutions but also try to better
+  communicate concerns about correctness and completeness.

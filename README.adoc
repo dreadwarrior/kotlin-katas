@@ -1,0 +1,51 @@
+= Kotlin Katas
+Thomas Juhnke <contact@dreadlabs.de>
+v0.1, 2021-11-23
+
+== Description
+
+This project collects various code Katas for the JVM/Kotlin stack.
+
+The collection contains examples of problems I have encountered during my
+professional work as an employed software developer.
+
+It is intended to reflect on debates with colleagues regarding code quality,
+test coverage and solution approaches.
+
+Furthermore, it serves as a playground for my own exercises and for improving my
+skills as a software developer.
+
+== Kata contents
+
+Every Kata _should_ contain the following sections:
+
+. _Problem description_: +
+  Describes the problem and gives context for solving it.
+
+. _Tasks_: +
+  Using *Given*-*When*-*Then* to specify pre-conditions, behavior and
+  expectations. +
+  The purpose of writing tasks this way is to reflect the causal requirement of
+  the Kata. If possible, avoid technical details and aim for a "big picture"
+  task description.
+
+. _Questions_: +
+  Contains questions that have arisen during problem solving or a review of it.
+
+. _Hints_: +
+  Helpful tips to get you started solving the problem at hand.
+
+. _Links_: +
+  Informative links to satisfy the desire for deeper understanding.
+
+. _Diary_ +
+  Background on the genesis of the Kata.
+
+== Katas
+
+link:doc/katas/UriFilenamePrefixer.adoc[UriFilenamePrefixer]::
+Prefix the file name component of an URI with a given prefix.
+
+== Links
+
+* link:https://martinfowler.com/bliki/GivenWhenThen.html[Martin Fowler: GivenWhenThen]
